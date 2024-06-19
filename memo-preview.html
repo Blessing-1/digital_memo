@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/memo.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+
+  <!--Icons-->
+  <link rel="stylesheet" href="fa/css/brands.css" />
+  <link rel="stylesheet" href="fa/css/solid.css" />
+  <link rel="stylesheet" href="fa/css/fontawesome.css" />
+  <link rel="stylesheet" href="fa/css/regular.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js">
+  </script>
+  <title>Edit Memo</title>
+</head>
+
+<body>
+  <div class="main">
+    <!-- Top Navigation-->
+    <nav>
+      <div class="logo">
+        <img src="img/logo2.png" alt="Logo is here">
+      </div>
+      <div class="links">
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a href="#">INTEGRITY</a></li>
+          <li><a href="#">FAIRNESS</a></li>
+          <li><a href="#">SERVICE</a></li>
+          <li><a href="profile.html"><i class="fas fa-user"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+    <section>
+      <!--a href="compose.html" class="arrow"-->
+      <!--img src="RemixIcon-2.5.0/icons/System/arrow-go-back-line.svg" alt=""-->
+      <!-- </a> -->
+      <ul class="edit-memo">
+        <!-- <li>
+          <a href="compose.html" class="arrow">
+            <img src="RemixIcon-2.5.0/icons/System/arrow-go-back-line.svg" alt="back">
+          </a>
+        </li> -->
+        <li><a onclick="history.back()" href="#">Back</a></li>
+        <li><a id="btnPrint" href="">Print</a></li>
+        <li><a id="btnSend" href="">Send</a></li>
+      </ul>
+
+      <div id="memo-content" class="memo-content">
+
+        <div class="letter-head">
+          <img src="img/logo2.png" alt="Logo is here">
+          <h1 id="divisions"></h1>
+          <h2>DEPARTMENT </h2>
+          <h3>MEMORANDUM</h3>
+        </div>
+        <table class="memo-meta">
+          <tr>
+            <th>TO:</th>
+            <td id="to"></td>
+          </tr>
+          <tr>
+            <th>FROM:</th>
+            <td id="from"></td>
+          </tr>
+          <tr>
+            <th>THROUGH:</th>
+            <td id="through"></td>
+          </tr>
+          <tr>
+            <th>CC:</th>
+            <td id="cc"></td>
+          </tr>
+          <tr>
+            <th>REF:</th>
+            <td id="ref"></td>
+          </tr>
+          <tr>
+            <th>DATE:</th>
+            <td id="date"></td>
+          </tr>
+          <tr>
+            <th>SUBJECT:</th>
+            <td id="subject"></td>
+          </tr>
+        </table>
+
+        <hr>
+        <div style="margin-top: 10px;"  id="body"></div>
+        <p id="minute"></p>
+        <div class="memo-footer">
+          <!-- <hr> -->
+          <img class="signature" src="img/sign.svg" alt="Signature" width="20px">
+          <p id="signedName">Signature</p>
+        </div>
+
+      </div>
+    </section>
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+    <script>
+      function quillGetHTML(inputDelta) {
+        var tempCont = document.createElement("div");
+        (new Quill(tempCont)).setContents(inputDelta);
+        return tempCont.getElementsByClassName("ql-editor")[0].innerHTML;
+      }
+      // Get the composed memo from he local storage
+      const composedMemo = JSON.parse(localStorage.getItem('composedMemo'));
+      const authUser = JSON.parse(localStorage.getItem('authUser'));
+
+      // Set the text contents of the fields
+      document.getElementById("divisions").innerHTML = composedMemo.divisions.toUpperCase();
+      document.getElementById("to").textContent = composedMemo.to;
+      document.getElementById("from").textContent = composedMemo.from;
+      document.getElementById("through").textContent = composedMemo.through;
+      document.getElementById("cc").textContent = composedMemo.cc;
+      document.getElementById("ref").textContent = composedMemo.ref;
+      document.getElementById("date").textContent = moment(composedMemo.date).format('LL');
+      document.getElementById("subject").textContent = composedMemo.subject;
+      document.getElementById("body").innerHTML = quillGetHTML(JSON.parse(composedMemo.bodyDelta));
+      document.getElementById("minute").textContent = composedMemo.minute;
+      document.getElementById("signedName").textContent = authUser.firstname + ' ' + authUser.lastname;
+
+      const btnPrint = document.getElementById("btnPrint");
+      const makepdf = document.getElementById("memo-content");
+
+
+      btnPrint.addEventListener("click", function (e) {
+        e.preventDefault();
+        html2pdf().from(makepdf).save();
+        return true;
+
+      });
+    </script>
+
+    <script type="module">
+
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+      import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyAPw3zIsWwYmVCH6OpNPeJg_e9fnmk9kW4",
+        authDomain: "gra-school.firebaseapp.com",
+        projectId: "gra-school",
+        storageBucket: "gra-school.appspot.com",
+        messagingSenderId: "693272566435",
+        appId: "1:693272566435:web:6472e527473a570effbd16",
+        measurementId: "G-TQ8Y4PYQSX"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const db = getFirestore(app);
+
+      const btnSend = document.getElementById("btnSend");
+
+      btnSend.addEventListener("click", async function (e) {
+        e.preventDefault();
+        try {
+          // Get the composed memo from he local storage
+          const composedMemo = localStorage.getItem('composedMemo');
+
+          // Save the new memo in the cloud database
+          const docRef = await addDoc(collection(db, "memo"), JSON.parse(composedMemo));
+
+          // TODO: Remove the composedMemo from the local storage if the data is saved successfully
+          // TODO: Prompt the user that the message is sent
+          // Navigate to the memo preview page
+          window.location = '/sent.html';
+        } catch (e) {
+          // TODO: Prompt the user that the message is not sent
+          console.error("Error adding document: ", e);
+        }
+        return true;
+      });
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,133 @@
+<head>
+  <!DOCTYPE html>
+  <html lang="en">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/inbox.css">
+  <title>Sent</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+
+
+  <!--Icons-->
+  <link rel="stylesheet" href="fa/css/brands.css" />
+  <link rel="stylesheet" href="fa/css/solid.css" />
+  <link rel="stylesheet" href="fa/css/fontawesome.css" />
+  <link rel="stylesheet" href="fa/css/regular.css" />
+  <link rel="stylesheet" href="fa/css/all.css" />
+
+<body>
+  <div class="main">
+    <!-- Top Navigation-->
+    <nav>
+      <div class="logo">
+        <img src="img/logo2.png" alt="Logo is here">
+      </div>
+      <div class="links">
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a href="#">INTEGRITY</a></li>
+          <li><a href="#">FAIRNESS</a></li>
+          <li><a href="#">SERVICE</a></li>
+          <li><a href="profile.html"><i class="fas fa-user"></i></a></li>
+        </ul>
+      </div>
+      <div class="abt">
+      </div>
+    </nav>
+    <main>
+      <aside>
+        <ul>
+          <li><a href="compose.html"> <img style="width: 25px; height: 25px;"
+                src="RemixIcon-2.5.0/icons/Design/pencil-line.svg"> Compose</a></li>
+          <li><a href="inbox.html"> <img style="width: 25px; height: 25px;"
+                src="RemixIcon-2.5.0/icons/Business/mail-line.svg"> Inbox</a></li>
+          <li class="active"><a href="sent.html"> <img style="width: 25px; height: 25px;"
+                src="RemixIcon-2.5.0/icons/Business/send-plane-line.svg"> Sent</a></li>
+          <li><a href="starred.html"> <img style="width: 25px; height: 25px;"
+                src="RemixIcon-2.5.0/icons/System/star-line.svg"> Starred</a></li>
+          <li><a href="drafts.html"> <img style="width: 25px; height: 25px;"
+                src="RemixIcon-2.5.0/icons/Document/draft-line.svg"> Drafts</a></li>
+          <li><a href="settings.html"> <img style="width: 25px; height: 25px;"
+                src="RemixIcon-2.5.0/icons/System/settings-line.svg"> Settings</a></li>
+        </ul>
+      </aside>
+      <section class="body">
+        <h2 class="section-title">List of Memos</h2>
+
+        <!-- Email List rows starts -->
+        <div id="emailList__list" class="emailList__list">
+
+
+          <p style="text-align: center; margin-top: 50px; color: grey; font-size: x-large;">Loading...</p>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+  <script type="module" src="js/auth.js"></script>
+  <script>
+    // Get the composed memo from he local storage
+    const authUser = JSON.parse(localStorage.getItem('authUser'));
+    document.getElementById("from").value = authUser.department;
+  </script>
+  <script type="module">
+
+    // Import the functions you need from the SDKs you need
+    import { db } from "./js/firebase.js";
+    import { collection, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+
+    // Get the email list element
+    const memoList = document.getElementById('emailList__list');
+
+    const q = query(collection(db, "memo"), where("from", "==", authUser.department));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let memosHTMLString = '';
+      if (!querySnapshot.docs.length) {
+        memoList.innerHTML = `<p style="text-align: center; margin-top: 50px; color: grey">Have have no Memos</p>`;
+        return false;
+      }
+      querySnapshot.forEach((doc) => {
+        // Save the memo localy
+        localStorage.setItem(doc.id, JSON.stringify(doc.data()));
+
+        memosHTMLString += `
+          <div data-id=${doc.id} id="${doc.id}"" class="emailRow">
+              <div class="emailRow__options">
+                <input type="checkbox" name="" id="" />
+                <i class="fas fa-star"></i>
+              </div>
+              <h3 class="emailRow__title">To: ${doc.data().to}</h3>
+              <div class="emailRow__message">
+                <h4>
+                  ${doc.data().subject}
+                  <span class="emailRow__description"> - ${doc.data().body} </span>
+                </h4>
+              </div>
+              <p class="emailRow__time">${ moment(doc.data().date).format('LL')}</p>
+            </div>
+          `
+      });
+      memoList.innerHTML = memosHTMLString;
+      const emailRow = document.querySelectorAll('.emailRow');
+      emailRow.forEach((row) => {
+        row.addEventListener("click", async function (e) {
+          window.location = '/memo.html?id=' + row.dataset.id;
+          e.preventDefault();
+          return true;
+        });
+      })
+    });
+
+  </script>
+</body>
+
+</html>

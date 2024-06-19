@@ -1,0 +1,337 @@
+*{
+    padding: top 10px;
+    margin: 0px;
+    box-sizing: border;
+    list-style: none;
+    text-decoration: none;
+}
+
+body{
+  /*   background: url(bg.jpg); */
+   background: #f5eeee;
+}
+
+     /* Image main style */
+img{
+    width: 100%;
+    height: 300px;
+}
+.icons{
+    width: 30px;
+}
+
+   /* Top navigation */
+.main nav{
+    width: 100%;
+    height: 80px;
+    background: #a00404;
+    display: flex;
+    flex-direction: row;
+}
+
+/* Grey Bar */
+.main nav::after{
+    content: "";
+    position: absolute;
+    top: 80px;
+    width: 100%;
+    height: 40px;
+    background: rgb(251, 251, 252);
+    z-index: -1000;
+}
+
+     /* GRA logo */
+.main nav .logo img{
+    width: 300px;
+    height: 105px;
+    z-index: 1000;
+}
+
+
+/* Responsiveness */
+.main nav .menu{
+    width: 500px;
+    position: absolute;
+    right: 0;
+}
+
+
+     /* Unordered list style */
+.main nav .menu ul{
+    display: flex;
+    flex-direction: row;
+    margin: 10px 100px;
+    
+}
+     
+     /* Listed items style */
+.main nav .menu ul li{
+    margin: 20px;
+}
+
+/* Motto of GRA */
+.main nav .menu ul li a{
+    font-size: 18px;
+    font-family: century gothic;
+    color: #ccc;
+    transition: all .4s ease;
+    font-weight: 600;
+}
+ 
+
+     /* Close button */
+.main nav .closebtn{
+    display: none;
+}
+
+          /* About main style */
+.main .abt{
+    position: absolute;
+    top: 80px;
+    right: 200px;
+    z-index: 1000;
+}
+      
+        /* About text style */
+.main .abt a{
+    color: #070735;
+    font-family:  century gothic;
+    font-weight: 500;
+    font-size: 18px;
+    font-weight: 600;
+}
+   
+        /* Effect after hovering over the text */
+.main nav .menu ul li a:hover,
+.main nav .menu ul li a:active{
+    color: #fff;
+}
+
+        /* Main content */
+.main .content{
+    width: 705px auto;
+    height: 80vh;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+     margin: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: white;
+}
+     
+     /* Top image */
+.main .content .sec_1{
+    width: 1500px;
+    height: 300px;
+}
+ 
+
+        /*Text on image */
+.main .content .sec_1 .overflow{
+    position: absolute;
+    width: 1180px;
+    top: 180px;
+    z-index: 1000;
+    font-size: 50px;
+    left: 160px;
+    color: #fff;
+    font-family: century gothic;
+    text-shadow: 2px 2px #ccc;
+}
+
+.main .content .sec_1 .overflow .down{
+    position: relative;
+    top: 20px;
+    left: 200px;
+}
+      /* Image style */
+.main .content .sec_1 img{
+    margin:0px;
+    position: absolute;
+    border: 2px solid #ccc;
+    border radius: 10px;
+    width: 1265px;
+    height: 280px
+
+
+
+}
+    /* Login style */
+
+.main .content .login{
+   /* width: 100%; */
+    height: 50vh;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    margin: 100px 600px auto;
+    font-family: century gothic;
+}
+    
+     /* Login header */
+.main .content .login h1{
+    color: darkblue;
+    font-family: century gothic;
+    padding: 30px 78px;
+}
+   
+   /*  Input container */
+
+.main .content .login span{
+    width: 250px;
+}
+   /* Text before input */
+.main .content .login span label{
+    padding-left: 10px;
+}
+
+     /* Input  style*/
+.main .content .login span input{
+    border: 1px solid #333;
+    outline: none;
+    margin: 7px;
+    width: 220px;
+    padding: 10px;
+    font-family: century gothic;
+    border-radius: 5px;
+    font-weight: 500;
+}
+     
+     /* Effect afer clicking or hovering the input */
+.main .content .login span input:hover,
+.main .content .login span input:active{
+    border: 1px solid #4d8cd4;
+    color: darkblue;
+}
+       /* Button style */
+.main .content .login button{
+    width: 140px;
+    padding: 10px;
+    margin: 20px 45px; 
+    background: #4d8cd4;
+    border: none;
+    font-family: century gothic;
+    font-size:18px;
+    font-weight: 600;
+    border-radius: 10px;
+    color: rgb(215, 221, 228);
+}
+
+
+        /* /* Effect afer clicking or hovering the button */
+.main .content .login button:active,
+.main .content .login button:hover{
+    background-color: #fff;
+    box-shadow: 2px 2px 10px #ccc;
+    color: cornflowerblue;
+}
+
+
+/* Responsivesss */
+
+/*
+@media screen and (max-width: 1000px) {
+    body{
+        background: #fff;
+    }
+
+.main nav{
+    width: 100%;
+}
+    /*
+.main nav .menu{
+    position: fixed;
+    width: 300px;
+    height: 100vh;
+    top: 100px;
+    background: rgb(182, 206, 252);
+    right: -5000px;
+    transition: all .4s ease-in-out;
+}
+
+.main nav .menu ul{
+    display: flex;
+    flex-direction: column;
+}
+
+.main nav .menu ul li a{
+    color: #0e165e;
+    font-size: 20px;
+}
+
+.main nav .closebtn{
+    display: block;
+}
+
+
+.main nav .closebtn a{
+    font-size: 30px;
+    margin: 40px;
+    font-family: cursive;
+}
+
+.main .burger{
+    width: 40px;
+    height: 40px;
+    background: #ccc;
+    position: absolute;
+    right: 0;
+    margin: 20px;
+}
+
+.main .burger .ham{
+    width: 25px;
+    height: 3px;
+    background: #85a1d4;
+    margin: 5px;
+}
+
+
+*/
+
+/*
+.main .content{
+    width: 550px;
+    margin: 40px auto;
+}
+
+.main .content .sec_1{
+    width: 100%;
+}
+
+*/
+
+      /*Text on image */
+      /*
+      .main .content .sec_1 .overflow{
+        position: absolute;
+        width: 500px;
+        font-size: 28px;
+        left: 100px;
+        text-shadow: 2px 2px #ccc;
+    }
+    
+    .main .content .sec_1 .overflow .down{
+        position: relative;
+        top: 10px;
+        left: 100px;
+    }
+
+.main .content .sec_1 img{
+    width: 550px;
+}
+
+.main .content .login{
+    width: 400px;
+    height: 50vh;
+    background-color: #f7f6f2;
+    display: flex;
+    flex-direction: column;
+    margin: 70px 60px auto;
+    font-family: century gothic;
+    background: #fcfcfc;
+}
+}
+
+*/

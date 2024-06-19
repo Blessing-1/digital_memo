@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/compose.css">
+  <link rel="stylesheet" href="css/autocomplete.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script>
+  <!-- Main Quill library -->
+  <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+  <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
+  <!-- Theme included stylesheets -->
+  <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
+
+  <!-- Core build with no theme, formatting, non-essential modules -->
+  <link href="//cdn.quilljs.com/1.3.6/quill.core.css" rel="stylesheet">
+  <script src="//cdn.quilljs.com/1.3.6/quill.core.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://jeremyfagis.github.io/dropify/dist/css/dropify.min.css">
+
+  <!--Icons-->
+  <link rel="stylesheet" href="fa/css/brands.css" />
+  <link rel="stylesheet" href="fa/css/solid.css" />
+  <link rel="stylesheet" href="fa/css/fontawesome.css" />
+  <link rel="stylesheet" href="fa/css/regular.css" />
+  <title>GRA | Compose Memo</title>
+</head>
+
+<body>
+  <div class="main">
+    <!-- Top Navigation-->
+    <nav>
+      <div class="logo">
+        <img src="img/logo2.png" alt="Logo is here">
+      </div>
+      <div class="links">
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a href="#">INTEGRITY</a></li>
+          <li><a href="#">FAIRNESS</a></li>
+          <li><a href="#">SERVICE</a></li>
+          <li><a href="profile.html"><i class="fas fa-user"></i></a></li>
+        </ul>
+      </div>
+      <div class="abt">
+
+      </div>
+    </nav>
+    <main>
+      <aside>
+        <ul>
+          <li class="active"><a href="compose.html"> <img alt="" style="width: 25px; height: 25px;"
+                src="RemixIcon-2.5.0/icons/Design/pencil-line.svg"> Compose</a></li>
+          <li><a href="inbox.html"> <img alt="" style="width: 25px; height: 25px;"
+                src="RemixIcon-2.5.0/icons/Business/mail-line.svg"> Inbox</a></li>
+          <li><a href="sent.html"> <img alt="" style="width: 25px; height: 25px;"
+                src="RemixIcon-2.5.0/icons/Business/send-plane-line.svg"> Sent</a></li>
+          <li><a href="starred.html"> <img alt="" style="width: 25px; height: 25px;"
+                src="RemixIcon-2.5.0/icons/System/star-line.svg"> Starred</a></li>
+          <li><a href="drafts.html"> <img alt="" style="width: 25px; height: 25px;"
+                src="RemixIcon-2.5.0/icons/Document/draft-line.svg"> Drafts</a></li>
+          <li><a href="settings.html"> <img alt="" style="width: 25px; height: 25px;"
+                src="RemixIcon-2.5.0/icons/System/settings-line.svg"> Settings</a></li>
+        </ul>
+      </aside>
+      <section>
+        <form id="frmMemo" action="POST">
+          <div class="option">
+
+            <div class="mobile" id="mobile">
+              <div class="opt-tools">
+                <select id="divisions">
+                  <option value="Information Technology Education">Information Technology Education</option>
+                  <option value="Accounting Studies">Accounting Studies</option>
+                  <option value="Mathematics Education">Mathematics Education</option>
+                  <option value="Construction & Wood Technology Education">Construction & Wood Technology Education
+                  </option>
+                  <option value="Automotive & Mechnical Technology Education">Automotive & Mechnical Technology
+                    Education</option>
+                  <option value="Electrical & Electronics Technology Education">Electrical & Electronics Technology
+                    Education</option>
+                  <option value="Catering & Hospitality Education">Catering & Hospitality Education</option>
+                  <option value="Fashion & Textiles Design Education">Fashion & Textiles Design Education</option>
+                  <option value="Languages Education">Languages Education</option>
+                  <option value="Interdisciplinary Studies">Interdisciplinary Studies</option>
+                  <option value="Management Studies">Management Studies</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+          <div class="textarea">
+            <span>
+              <label for="path">TO:</label>
+              <input list="users-list" class="to" id="to" name="to" type="text" id="path" placeholder="Destination"
+                required>
+            </span>
+            <span>
+              <label for="from">FROM:</label>
+              <input list="users-list" id="from" name="from" type="text" id="path" placeholder="" required>
+            </span>
+            <span>
+              <label for="through">THROUGH:</label>
+              <input list="users-list" id="through" name="through" type="text" id="path" placeholder="" required>
+            </span>
+            <span>
+              <label for="cc">CC:</label>
+              <input list="users-list" id="cc" name="cc" type="text" id="path" placeholder="">
+            </span>
+            <span>
+              <label for="date">DATE:</label>
+              <input id="date" name="date" type="date" id="path" placeholder="Month dd, yyyy" />
+
+              <label for="date">REF:</label>
+              <input list="users-list" id="ref" name="ref" type="text" id="path" placeholder="">
+
+            </span>
+
+            <div class="input-text">
+              <span class="m-0">
+                <label for="subject">SUBJECT</label>
+                <textarea name="subject" id="subject" cols="100" rows="2" placeholder="Subject"></textarea>
+              </span>
+            </div>
+          </div>
+          <div style="width: 85%; margin:auto; margin-top: 10px;">
+            <div id="editor">
+            </div>
+            <textarea style="margin-top: 10px;" name="minute" id="minute" cols="98" rows="4"
+              placeholder="Minute/Comments"></textarea>
+
+            <input style="margin-top: 15px;" name="file1" type="file" class="dropify" data-height="100" multiple />
+          </div>
+
+          <div class="submit-container">
+            <button class="button" id="btnSubmit" type="submit">Generate</button>
+          </div>
+        </form>
+
+
+        <datalist id="users-list">
+        </datalist>
+
+        <script type="module" src="js/auth.js"></script>
+        <!-- Include the Quill library -->
+        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+        <!-- Initialize Quill editor -->
+        <script>
+          var toolbarOptions = [
+            ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+            ['blockquote', 'code-block'],
+
+            [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+            [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+            [{ 'direction': 'rtl' }],                         // text direction
+
+            [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+            [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+            [{ 'font': [] }],
+            [{ 'align': [] }],
+
+            ['clean']                                         // remove formatting button
+          ];
+          var quill = new Quill('#editor', {
+            theme: 'snow',
+            toolbar: toolbarOptions,
+            placeholder: "Enter the body here..."
+          });
+
+          console.log(quill);
+        </script>
+
+
+
+
+        <script>
+          $('.dropify').dropify({
+            messages: {
+              'default': 'Drag and drop Attachment files here',
+              'replace': 'Drag and drop or click to replace',
+              'remove': 'Remove',
+              'error': 'Ooops, something wrong happended.'
+            }
+          });
+          // Get the composed memo from he local storage
+          const authUser = JSON.parse(localStorage.getItem('authUser'));
+          document.getElementById("from").value = authUser.department;
+        </script>
+
+
+
+        <script type="module">
+          // Import the functions you need from the SDKs you need
+          // Import the functions you need from the SDKs you need
+          import { db } from "./js/firebase.js";
+          import { collection, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+
+          var frmMemo = document.getElementById("frmMemo");
+          var makepdf = document.getElementById("memo-content");
+
+          const users = [];
+          const userNames = ['loading...'];
+          let userOptionsList = '';
+
+          const q = query(collection(db, "users"));
+          const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              users.push(doc.data());
+              userNames.push(`${doc.data().firstname} ${doc.data().firstname}`);
+              userOptionsList += `<option value="${doc.data().department}">`;
+            });
+            document.getElementById("users-list").innerHTML = userOptionsList;
+            userOptionsList = '';
+          });
+
+
+          // autocomplete(document.querySelector(".to"), userNames);
+
+          frmMemo.addEventListener("submit", function (e) {
+            // Prevent the form from sending a post request by default
+            e.preventDefault();
+
+            // Get the values from the fields
+            const divisions = document.getElementById("divisions").value;
+            const to = document.getElementById("to").value;
+            const from = document.getElementById("from").value;
+            const through = document.getElementById("through").value;
+            const cc = document.getElementById("cc").value;
+            const date = document.getElementById("date").value;
+            const subject = document.getElementById("subject").value;
+            const body = quill.root.innerText;
+            const bodyDelta = JSON.stringify(quill.getContents());
+            const minute = document.getElementById("minute").value;
+            const ref = document.getElementById("ref").value;
+
+            // Create an object to hold the data
+            const newMemo = { divisions, to, from, through, cc, ref, date, subject, body, bodyDelta, minute };
+
+            // Stringify the object and save the memo data in a local storage
+            localStorage.setItem('composedMemo', JSON.stringify(newMemo));
+
+            // Navigate to the memo preview page
+            window.location = '/memo-preview.html';
+            return true;
+          });
+        </script>
+
+      </section>
+    </main>
+  </div>
+</body>
+
+</html>
